@@ -1,0 +1,29 @@
+ul#danbanslider{
+    list-style: none;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: relative;
+}
+
+ul#danbanslider li{
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: absolute;
+    left:400px;
+}
+ul#danbanslider-controls{position: relative;}
+ul#danbanslider-controls li{
+    display: inline-block;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+ul#danbanslider li.danbanslider-active{left:0px;}
+
+ul#danbanslider li.danbanslider-hide-left{left:-400px !important;}
+ul#danbanslider li.danbanslider-show-left{left:0px !important;}
+
+ul#danbanslider li.danbanslider-hide-left{right:-400px !important;}
+ul#danbanslider li.danbanslider-show-left{right:0px !important;}
