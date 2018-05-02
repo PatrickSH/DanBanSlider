@@ -1,0 +1,17 @@
+ul#niceslider{
+    list-style: none;
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: relative;
+}
+
+ul#niceslider li{
+    background-repeat: no-repeat;
+    display: inline-block;
+    transition: all 1.5s;
+    position: absolute;
+}
