@@ -15,3 +15,12 @@ ul#niceslider li{
     transition: all 1.5s;
     position: absolute;
 }
+ul#niceslider-controls{position: relative;}
+ul#niceslider-controls li{
+    display: inline-block;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+ul#niceslider li.niceslider-hide-left{left:-400px !important;}
+ul#niceslider li.niceslider-show-left{left:0px !important;}
