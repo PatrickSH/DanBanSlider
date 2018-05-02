@@ -51,7 +51,13 @@ function niceslider(options)
 
     $(document).on('click','#niceslider-forward',function(){
         curSlide = $(".niceslider-active");
-        nextSlide = curSlide.next();
+
+        if(options.loop && curSlide.attr('data-niceslider-pos') == childCount){ //If we run in loop and is at end go to first one
+            nextSlide = $("#niceslider").children().first();
+        }else{
+            nextSlide = curSlide.next();
+        }
+
         curSlide.removeClass('niceslider-active');
         nextSlide.addClass('niceslider-active');
 
@@ -62,7 +68,13 @@ function niceslider(options)
 
     $(document).on('click','#niceslider-backward',function(){
         curSlide = $(".niceslider-active");
-        nextSlide = curSlide.prev();
+
+        if(options.loop && curSlide.attr('data-niceslider-pos') == childCount){ //If we run in loop and is at end go to first one
+            nextSlide = $("#niceslider").children().first();
+        }else{
+            nextSlide = curSlide.prev();
+        }
+
         curSlide.removeClass('niceslider-active');
         nextSlide.addClass('niceslider-active');
 
