@@ -2,10 +2,12 @@ $(document).ready(function(){
 
     var options =
     {
-        crop : true,
+        crop : false,
         height : 400,
-        width : 400
+        width : 400,
+        transistiontime : 0.5
     }
+
     var curSlide;
     var nextSlide;
 
@@ -16,7 +18,9 @@ $(document).ready(function(){
 
     function niceslider(options)
     {
-        appendControls();
+        if(!$("#niceslider-controls")[0]) //Append standard controls if not present
+            appendControls();
+
 
         var el = $("#niceslider");
         var children = el.children();
@@ -25,23 +29,21 @@ $(document).ready(function(){
 
         children.css({
            height : options.height+"px",
-           width : options.width+"px"
+           width : options.width+"px",
+           transition : options.transistiontime+"s"
         });
 
-        children.each(function(){
-
+        children.each(function(){ //Append all data on slides
            var image = $(this).attr('data-src');
            $(this).css('background-image','url('+image+')');
            $(this).attr('data-niceslider-pos',i);
 
-           if(options.crop) //If we want crop do it
+           if(options.crop){ //If we want crop do it
                $(this).css('background-size','cover');
-
-           if(i != 1){ //Add minus position
-               $(this).css('left','400px');
-           }else{
-               $(this).css('left','0px');
+           } else{
+               $(this).css('background-size','initial');
            }
+
 
            i++;
         });
@@ -52,8 +54,9 @@ $(document).ready(function(){
             curSlide.removeClass('niceslider-active');
             nextSlide.addClass('niceslider-active');
 
-            curSlide.removeClass('niceslider-show-left').addClass('niceslider-hide-left');
-            nextSlide.addClass('niceslider-show-left');
+            /**Remove right classes**/
+            curSlide.removeClass('niceslider-show-left').removeClass('niceslider-show-right').removeClass('niceslider-hide-right').addClass('niceslider-hide-left');
+            nextSlide.removeClass('niceslider-show-right').removeClass('niceslider-hide-right').addClass('niceslider-show-left');
         });
 
         $(document).on('click','#niceslider-backward',function(){
@@ -62,9 +65,9 @@ $(document).ready(function(){
             curSlide.removeClass('niceslider-active');
             nextSlide.addClass('niceslider-active');
 
-            curSlide.css('left','unset');
-            curSlide.css("right",'400px');
-            nextSlide.css('left','0px');
+            /**Remove left classes**/
+            curSlide.removeClass('niceslider-show-right').removeClass('niceslider-show-left').removeClass('niceslider-hide-left').addClass('niceslider-hide-right');
+            nextSlide.removeClass('niceslider-show-left').removeClass('niceslider-hide-left').addClass('niceslider-show-right');
         });
 
     }

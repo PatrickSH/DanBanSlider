@@ -12,8 +12,8 @@ ul#niceslider{
 ul#niceslider li{
     background-repeat: no-repeat;
     display: inline-block;
-    transition: all 1.5s;
     position: absolute;
+    left:400px;
 }
 ul#niceslider-controls{position: relative;}
 ul#niceslider-controls li{
@@ -22,5 +22,10 @@ ul#niceslider-controls li{
     cursor: pointer;
 }
 
+ul#niceslider li.niceslider-active{left:0px;}
+
 ul#niceslider li.niceslider-hide-left{left:-400px !important;}
 ul#niceslider li.niceslider-show-left{left:0px !important;}
+
+ul#niceslider li.niceslider-hide-left{right:-400px !important;}
+ul#niceslider li.niceslider-show-left{right:0px !important;}
