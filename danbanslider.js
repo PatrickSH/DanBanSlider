@@ -79,6 +79,9 @@ function danbanslider(options)
             $("#danbanslider").children().removeClass().addClass('danbanslider-hide-right');
             nextSlide = $("#danbanslider").children().first();
         }else{
+            if(isEnd()) //Dont go further then last image
+                return false;
+
             nextSlide = curSlide.next();
         }
 
@@ -97,7 +100,7 @@ function danbanslider(options)
     $(document).on('click','#danbanslider-backward',function(){
         curSlide = $(".danbanslider-active");
 
-        if(isStart())
+        if(isStart()) //Dont go further then first image
             return false;
 
         nextSlide = curSlide.prev();
