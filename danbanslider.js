@@ -2,11 +2,34 @@
 
 var curSlide;
 var nextSlide;
+var childCount;
 
 function appendControls()
 {
     $("#danbanslider").after("<ul id='danbanslider-controls'><li id='danbanslider-backward'><</li><li id='danbanslider-forward'>></li></ul>");
 }
+
+function getCurrentPos()
+{
+    return curSlide.attr('data-danbanslider-pos');
+}
+
+function isEnd()
+{
+    return getCurrentPos() == childCount;
+}
+
+function isStart()
+{
+    return getCurrentPos() == 1;
+}
+
+function getNextPos()
+{
+    return parseInt(getCurrentPos()) + 1;
+}
+
+
 
 function danbanslider(options)
 {
@@ -16,7 +39,7 @@ function danbanslider(options)
 
     var el = $("#danbanslider");
     var children = el.children();
-    var childCount = el.children().length;
+    childCount = el.children().length;
     var i = 1;
 
 
@@ -52,7 +75,8 @@ function danbanslider(options)
     $(document).on('click','#danbanslider-forward',function(){
         curSlide = $(".danbanslider-active");
 
-        if(options.loop && curSlide.attr('data-danbanslider-pos') == childCount){ //If we run in loop and is at end go to first one
+        if(options.loop && isEnd()){ //If we run in loop and is at end go to first one
+            $("#danbanslider").children().removeClass().addClass('danbanslider-hide-right');
             nextSlide = $("#danbanslider").children().first();
         }else{
             nextSlide = curSlide.next();
@@ -62,18 +86,22 @@ function danbanslider(options)
         nextSlide.addClass('danbanslider-active');
 
         /**Remove right classes**/
-        curSlide.removeClass('danbanslider-show-left').removeClass('danbanslider-show-right').removeClass('danbanslider-hide-right').addClass('danbanslider-hide-left');
+        if(options.loop && isEnd()){
+            curSlide.removeClass('danbanslider-show-left').removeClass('danbanslider-show-right').removeClass('danbanslider-hide-right').addClass('danbanslider-hide-right');
+        }else{
+            curSlide.removeClass('danbanslider-show-left').removeClass('danbanslider-show-right').removeClass('danbanslider-hide-right').addClass('danbanslider-hide-left');
+        }
         nextSlide.removeClass('danbanslider-show-right').removeClass('danbanslider-hide-right').addClass('danbanslider-show-left');
     });
 
     $(document).on('click','#danbanslider-backward',function(){
         curSlide = $(".danbanslider-active");
 
-        if(options.loop && curSlide.attr('data-danbanslider-pos') == childCount){ //If we run in loop and is at end go to first one
-            nextSlide = $("#danbanslider").children().first();
-        }else{
-            nextSlide = curSlide.prev();
-        }
+        if(isStart())
+            return false;
+
+        nextSlide = curSlide.prev();
+
 
         curSlide.removeClass('danbanslider-active');
         nextSlide.addClass('danbanslider-active');
