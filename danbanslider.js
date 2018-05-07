@@ -1,6 +1,6 @@
 //$(document).ready(function(){
 
-var curSlide;
+var curSlide = $(".danbanslider-active");
 var nextSlide;
 var childCount;
 
@@ -71,6 +71,15 @@ function danbanslider(options)
 
             i++;
     });
+
+    if(options.autoplay){
+        var interval = setInterval(function(){
+            $("#danbanslider-forward").click();
+        },options.autoplayspeed);
+
+        if(!options.loop && isEnd())
+            clearInterval(interval);
+    }
 
     $(document).on('click','#danbanslider-forward',function(){
         curSlide = $(".danbanslider-active");
