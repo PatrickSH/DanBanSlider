@@ -11,7 +11,7 @@ ul#danbanslider li{
     background-repeat: no-repeat;
     display: inline-block;
     position: absolute;
-    left:400px;
+    left:100%;
 }
 ul#danbanslider-controls{position: relative;}
 ul#danbanslider-controls li{
@@ -22,8 +22,8 @@ ul#danbanslider-controls li{
 
 ul#danbanslider li.danbanslider-active{left:0px;}
 
-ul#danbanslider li.danbanslider-hide-left{left:-400px !important;}
+ul#danbanslider li.danbanslider-hide-left{left:-100% !important;}
 ul#danbanslider li.danbanslider-show-left{left:0px !important;}
 
-ul#danbanslider li.danbanslider-hide-left{right:-400px !important;}
+ul#danbanslider li.danbanslider-hide-left{right:-100% !important;}
 ul#danbanslider li.danbanslider-show-left{right:0px !important;}
