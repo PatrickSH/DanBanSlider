@@ -44,26 +44,26 @@ function danbanslider(options)
 
 
     el.css({
-        height : options.height+"px",
-        width : options.width+"px"
+        height : options.dimensions.height+"px",
+        width : options.dimensions.width+"px"
     });
 
     children.css({
-        height : options.height+"px",
-        width : options.width+"px",
-        transition : options.transistiontime+"s"
+        height : options.dimensions.height+"px",
+        width : options.dimensions.width+"px",
+        transition : options.graphics.transistiontime+"s"
     });
 
     children.each(function(){ //Append all data on slides
         var image = $(this).attr('data-src');
         $(this).css('background-image','url('+image+')');
 
-        if(options.backgroundColor) //We can use background color in case image is not tall enough
-            $(this).css('background-color',options.backgroundColor);
+        if(options.graphics.backgroundColor) //We can use background color in case image is not tall enough
+            $(this).css('background-color',options.graphics.backgroundColor);
 
         $(this).attr('data-danbanslider-pos',i);
 
-        if(options.crop){ //If we want crop do it
+        if(options.dimensions.crop){ //If we want crop do it
             $(this).css('background-size','cover');
         } else {
             $(this).css('background-size','initial');
@@ -72,19 +72,19 @@ function danbanslider(options)
             i++;
     });
 
-    if(options.autoplay){
+    if(options.playing.autoplay){
         var interval = setInterval(function(){
             $("#danbanslider-forward").click();
-        },options.autoplayspeed);
+        },options.playing.autoplayspeed);
 
-        if(!options.loop && isEnd())
+        if(!options.playing.loop && isEnd())
             clearInterval(interval);
     }
 
     $(document).on('click','#danbanslider-forward',function(){
         curSlide = $(".danbanslider-active");
 
-        if(options.loop && isEnd()){ //If we run in loop and is at end go to first one
+        if(options.playing.loop && isEnd()){ //If we run in loop and is at end go to first one
             $("#danbanslider").children().removeClass().addClass('danbanslider-hide-right');
             nextSlide = $("#danbanslider").children().first();
         }else{
@@ -98,7 +98,7 @@ function danbanslider(options)
         nextSlide.addClass('danbanslider-active');
 
         /**Remove right classes**/
-        if(options.loop && isEnd()){
+        if(options.playing.loop && isEnd()){
             curSlide.removeClass('danbanslider-show-left').removeClass('danbanslider-show-right').removeClass('danbanslider-hide-right').addClass('danbanslider-hide-right');
         }else{
             curSlide.removeClass('danbanslider-show-left').removeClass('danbanslider-show-right').removeClass('danbanslider-hide-right').addClass('danbanslider-hide-left');

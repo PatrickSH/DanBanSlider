@@ -10,14 +10,20 @@
         $(document).ready(function(){
             var options =
             {
-                crop : true,
-                height : 400,
-                width : 400,
-                transistiontime : 0.5,
-                backgroundColor : false,
-                loop : true,
-                autoplay : false,
-                autoplayspeed : 1500 //Will be ignored if autoplay is set to false
+                dimensions : {
+                    crop : false,
+                    height : 400,
+                    width : 400,
+                },
+                graphics : {
+                    transistiontime: 0.5,
+                    backgroundColor: "red",
+                },
+                playing : {
+                    loop : true,
+                    autoplay : false,
+                    autoplayspeed : 1500 //Will be ignored if autoplay is set to false
+                }
             };
 
             danbanslider(options);
